@@ -1,4 +1,4 @@
-package ar.juanprueba.conexionHibernate;
+package ar.juanprueba.conexionHibernateUnoAUno;
 
 import jakarta.persistence.*;
 // Mapeo ORM Hibernate
@@ -19,6 +19,10 @@ public class Cliente {
 	private String direccion;
 	
 	//crear relacion 1 a 1 en mapeo ORM
+	/*
+	 * Cascade.ALL hace que si eliminamos un registro se borre tambien la informacion relacionada a otras tablas
+	 * 
+	 */
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id")
 	private DetallesCliente detallesCLlientes;
@@ -72,6 +76,11 @@ public class Cliente {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", direccion=" + direccion + "]";
 	}
 
 	

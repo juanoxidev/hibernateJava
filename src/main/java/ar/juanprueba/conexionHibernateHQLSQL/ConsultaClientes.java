@@ -1,4 +1,4 @@
-package ar.juanprueba.conexionHibernate;
+package ar.juanprueba.conexionHibernateHQLSQL;
 
 import java.util.List;
 

@@ -1,13 +1,13 @@
-package ar.juanprueba.conexionHibernate;
+package ar.juanprueba.conexionHibernateHQLSQL;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ActualizaCliente {
+public class EliminarClienteHQL {
 
 	public static void main(String[] args) {
-		// COMO ACTUALIZAR UN OBJETO MAPEADO EN LA BBDD
+		// COMO ELIMINAR UN OBJETO MAPEADO EN LA BBDD CON HQL
 
 		// iniciamos la session Factory
 		SessionFactory miFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Cliente.class)
@@ -18,18 +18,9 @@ public class ActualizaCliente {
 
 		try {
 
-			int ClienteId = 1;
-
 			miSession.beginTransaction();
-
-			// agarro de la bd el cliente con el id que estoy buscando y lo guard en
-			// variable cliente.
-
-			Cliente miCliente = miSession.get(Cliente.class, ClienteId);
-
-			// modifico al cliente
-
-			miCliente.setNombre("Pepe");
+			// consulta: Eliminar clientes donde el apellido sea Goya 
+			miSession.createQuery("delete Cliente where apellido='Goya'").executeUpdate();
 
 			// se ejecuta el commit de la transaccion
 			miSession.getTransaction().commit();
@@ -38,7 +29,7 @@ public class ActualizaCliente {
 
 			miSession.close();
 
-			System.out.println("Registro actualizado correctamente en BBDD");
+			System.out.println("Registro eliminado correctamente en BBDD");
 
 			miSession.getTransaction().commit();
 		} finally {
@@ -47,5 +38,6 @@ public class ActualizaCliente {
 		}
 
 	}
+
 
 }
